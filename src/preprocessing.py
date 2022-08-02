@@ -1,14 +1,31 @@
 import pandas as pd
 from typing import List
+from dataclasses import dataclass, field
 
 
+@dataclass
 class BestData:
     """Data-object, contains list of pandas.DataFrame 
     self.data (List[pd.DataFrame]) - read-only 
     """
+    _data: List[pd.DataFrame]
 
-    def __init__(self, data: List[pd.DataFrame]):
-        self.data = data
+    def __len__(self):
+        return len(self._data)
+
+    def __iter__(self):
+        self._current_index = 0
+        return self
+
+    def __next__(self) -> pd.DataFrame:
+        if self._current_index >= len(self._data):
+            raise StopIteration
+        result = self._data[self._current_index]
+        self._current_index += 1
+        return result
+
+    def __getitem__(self, item_index):
+        return self._data[item_index]
 
 
 class BestDataPreparator:
