@@ -29,3 +29,5 @@ def sample2(data: pd.DataFrame):
 if __name__ == "__main__":
     data = pd.DataFrame([[1, None], [3, 4], [0, 3]], columns=['feat1', 'feat2'])
     print(sample2(data))
+    # model = ConstModel(1)
+    # print(model)

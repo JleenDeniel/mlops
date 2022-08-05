@@ -9,13 +9,11 @@ from src.model import Model
 @dataclass
 class ModelApplier:
     model: Model
-    data: List[pd.DataFrame]
+    data: pd.DataFrame
     _preprocessor = BestDataPreparator
 
     def apply(self) -> Sequence:
-        data = BestData(self.data)
+        data = BestData([self.data])
         prep_data = BestDataPreparator().prepare(data)
-        result = []
-        for chunk in prep_data:
-            self.model.apply(chunk)
+        result = self.model.apply(prep_data[0])
         return result
