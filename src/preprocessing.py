@@ -27,6 +27,12 @@ class BestData:
     def __getitem__(self, item_index):
         return self._data[item_index]
 
+    def __repr__(self):
+        result = ''
+        for i in range(len(self._data)):
+            result.join([self._data[i].to_string(), '\n'])
+        return result
+
 
 class BestDataPreparator:
     def prepare(self, data: BestData) -> BestData:
