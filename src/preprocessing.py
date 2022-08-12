@@ -1,6 +1,6 @@
 import pandas as pd
 from typing import List
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 
 @dataclass
@@ -27,6 +27,12 @@ class BestData:
     def __getitem__(self, item_index):
         return self._data[item_index]
 
+    def __repr__(self):
+        result = ''
+        for i in range(len(self._data)):
+            result.join([self._data[i].to_string(), '\n'])
+        return result
+
 
 class BestDataPreparator:
     def prepare(self, data: BestData) -> BestData:
@@ -42,7 +48,6 @@ class BestDataPreparator:
         for chunk in data:
             result.append(self._prepare_chunk(chunk))
         best_result = BestData(result)
-        self._show_data(best_result)
         return best_result
 
     def _show_data(self, data: BestData) -> None:

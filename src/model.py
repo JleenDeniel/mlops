@@ -4,7 +4,6 @@ import pandas as pd
 
 
 class Model(metaclass=ABCMeta):
-
     @abstractmethod
     def apply(self, data: pd.DataFrame) -> Sequence:
         pass
@@ -19,15 +18,17 @@ class ConstModel(Model):
         self.value = value
         super().__init__()
 
+    def __repr__(self):
+        return 'Model id: {}, model_info, const model, value: {}'.format(str(self.model_id), self.value)
+
     def apply(self, data: pd.DataFrame):
         return [self.value, ] * len(data)
 
     def info(self):
-        return "Constant model"
+        return repr(self)
 
 
 class AIModel(Model):
-
     def apply(self, data: pd.DataFrame) -> Sequence:
         self._check_data(data)
         return self._run_model(data)
