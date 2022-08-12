@@ -4,8 +4,6 @@ import pandas as pd
 
 
 class Model(metaclass=ABCMeta):
-    model_id: int
-
     @abstractmethod
     def apply(self, data: pd.DataFrame) -> Sequence:
         pass
@@ -16,8 +14,6 @@ class Model(metaclass=ABCMeta):
 
 
 class ConstModel(Model):
-    model_id = 0
-
     def __init__(self, value: int) -> None:
         self.value = value
         super().__init__()
@@ -33,7 +29,6 @@ class ConstModel(Model):
 
 
 class AIModel(Model):
-
     def apply(self, data: pd.DataFrame) -> Sequence:
         self._check_data(data)
         return self._run_model(data)

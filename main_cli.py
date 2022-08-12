@@ -8,7 +8,7 @@ from src.model_helper import ModelApplier
 
 @click.command()
 @click.argument('i', type=int)
-@click.argument('data', type=click.Path())
+@click.option('--data', '-d', type=click.Path())
 def apply_model(i, data):
     if i == 0:
         model = ConstModel(5)

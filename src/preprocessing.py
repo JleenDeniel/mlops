@@ -1,6 +1,6 @@
 import pandas as pd
 from typing import List
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 
 @dataclass
@@ -48,7 +48,6 @@ class BestDataPreparator:
         for chunk in data:
             result.append(self._prepare_chunk(chunk))
         best_result = BestData(result)
-        self._show_data(best_result)
         return best_result
 
     def _show_data(self, data: BestData) -> None:

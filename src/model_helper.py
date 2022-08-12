@@ -8,12 +8,12 @@ from src.model import Model
 
 @dataclass
 class ModelApplier:
-    model: Model
-    data: pd.DataFrame
+    _model: Model
+    _data: pd.DataFrame
     _preprocessor = BestDataPreparator
 
     def apply(self) -> Sequence:
-        data = BestData([self.data])
+        data = BestData([self._data])
         prep_data = BestDataPreparator().prepare(data)
-        result = self.model.apply(prep_data[0])
+        result = self._model.apply(prep_data[0])
         return result
